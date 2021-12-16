@@ -1,5 +1,12 @@
 {
-  "newResults": [],
+  "newResults": [
+    {
+      "model": "test result",
+      "price": "test price",
+      "location": "test location",
+      "url": "test url"
+    }
+  ],
   "oldResults": [],
   "links": [
     {
