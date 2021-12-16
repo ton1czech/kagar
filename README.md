@@ -42,19 +42,13 @@ git clone https://github.com/ton1czech/kagar
 cd kagar
 ```
 
-3. cd into `src` folder
-
-```
-cd src
-```
-
-4. install dependencies
+3. install dependencies
 
 ```
 go mod tidy
 ```
 
-5. run the app
+4. run the app
 
 ```
 go run kagar.go
