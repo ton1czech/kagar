@@ -8,7 +8,14 @@
         "url": "test url"
       }
     ],
-    "oldResults": [],
+    "oldResults": [
+      {
+        "model": "ttest result",
+        "price": "ttest price",
+        "location": "ttest location",
+        "url": "ttest url"
+      }
+    ],
     "links": [
       {
         "name": "Toyota Corolla E80 AE86",
