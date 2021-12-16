@@ -1,17 +1,19 @@
-{
-  "newResults": [
-    {
-      "model": "test result",
-      "price": "test price",
-      "location": "test location",
-      "url": "test url"
-    }
-  ],
-  "oldResults": [],
-  "links": [
-    {
-      "model": "Toyota Corolla E80 AE86",
-      "url": "https://www.theparking.eu/used-cars/toyota-corolla-e80-ae86.html#!/used-cars/toyota-corolla-e80-ae86.html%3Fid_pays%3D1%7C5%26id_boite%3D2%26tri%3Dprix_croissant"
-    }
-  ]
-}
+[
+  {
+    "newResults": [
+      {
+        "model": "test result",
+        "price": "test price",
+        "location": "test location",
+        "url": "test url"
+      }
+    ],
+    "oldResults": [],
+    "links": [
+      {
+        "name": "Toyota Corolla E80 AE86",
+        "link": "https://www.theparking.eu/used-cars/toyota-corolla-e80-ae86.html#!/used-cars/toyota-corolla-e80-ae86.html%3Fid_pays%3D1%7C5%26id_boite%3D2%26tri%3Dprix_croissant"
+      }
+    ]
+  }
+]
