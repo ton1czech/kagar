@@ -1,16 +1,14 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
 
 	"github.com/gocolly/colly"
 )
 
 type Database struct {
-    NewResults []Car `json:"newResults"`
-    OldResults []Car `json:"oldResults"`
+    NewResults []Car    `json:"newResults"`
+    OldResults []Car    `json:"oldResults"`
     Links      []Link   `json:"links"`
 }
 
@@ -23,44 +21,44 @@ type Car struct {
 
 type Link struct {
     Name string `json:"name"`
-    Url string `json:"link"`
+    Url  string  `json:"link"`
+}
+
+type Info struct {
+    Manufacturer string
+    Model        string
+    Detail       string
+    Price        string
+    Location     string
+    Fuel         string
+    Year         string
+    Transmission string
+    Mileage      string
 }
 
 func main() {
-    cars := make([]Car, 0)
+    links := []string{
+        "https://www.theparking.eu/used-cars/toyota-corolla-e80-ae86.html#!/used-cars/toyota-corolla-e80-ae86.html%3Ftri%3Dprix_croissant",
+        "https://www.theparking.eu/used-cars/toyota-soarer.html#!/used-cars/toyota-soarer.html%3Ftri%3Dprix_croissant",
+    }
 
+    scrapeWeb(links)
+}
+
+func scrapeWeb(links []string) {
     c := colly.NewCollector(
-        colly.AllowedDomains("www.theparking.eu"),
+        colly.AllowedDomains("www.theparking.eu", "theparking.eu"),
     )
 
     c.OnError(func(_ *colly.Response, err error) {
         panic(err)
     })
 
-    c.OnResponse(func(r *colly.Response) {
-        fmt.Println(r.Request.URL)
+    c.OnHTML("ul#resultats", func(h *colly.HTMLElement) {
+        fmt.Println(h)
     })
 
-    c.Visit("")
-
-    fmt.Println(cars)
-    links := getUrls()
-
-    for i := range links {
-        fmt.Println(links[i].Url)
+    for _, link := range links {
+        c.Visit(link)
     }
-}
-
-func getUrls() (links []Link) {
-    file, err := ioutil.ReadFile("./db.json")
-    if err != nil {
-        panic(err)
-    }
-
-    err = json.Unmarshal(file, &links)
-    if err != nil {
-        panic(err)
-    }
-
-    return links
 }
