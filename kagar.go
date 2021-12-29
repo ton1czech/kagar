@@ -6,25 +6,7 @@ import (
 	"github.com/gocolly/colly"
 )
 
-type Database struct {
-    NewResults []Car    `json:"newResults"`
-    OldResults []Car    `json:"oldResults"`
-    Links      []Link   `json:"links"`
-}
-
 type Car struct {
-    Model    string `json:"model"`
-    Price    string `json:"price"`
-    Location string `json:"location"`
-    Url      string `json:"url"`
-}
-
-type Link struct {
-    Name string `json:"name"`
-    Url  string  `json:"link"`
-}
-
-type Info struct {
     Manufacturer string
     Model        string
     Detail       string
