@@ -44,6 +44,7 @@ func scrapeWeb(links []string) {
 
         car := Car{}
         car.Manufacturer = strings.Trim(doc.Find("span.title-block.brand").Text(), " ")
+        car.Model = strings.Trim(doc.Find("span.sub-title.title-block").Text(), " ")
         cars = append(cars, car)
     })
 
