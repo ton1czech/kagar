@@ -42,6 +42,8 @@ func main() {
             car := Car{
                 Manufacturer: strings.TrimSpace(h.ChildText("span.title-block.brand")),
                 Model: strings.TrimSpace(h.ChildText("span.sub-title.title-block")),
+                Detail: strings.TrimSpace(h.ChildText("span.nowrap")),
+                Price: strings.TrimSpace(h.ChildText("p.prix")),
             }
 
             cars = append(cars, car)
