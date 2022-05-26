@@ -44,6 +44,7 @@ func main() {
                 Model: strings.TrimSpace(h.ChildText("span.sub-title.title-block")),
                 Detail: strings.TrimSpace(h.ChildText("span.nowrap")),
                 Price: strings.TrimSpace(h.ChildText("p.prix")),
+                Location: strings.TrimSpace(h.ChildText("div.location > span.upper")),
             }
 
             cars = append(cars, car)
