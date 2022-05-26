@@ -1,7 +1,9 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"os"
 	"strings"
 
 	"github.com/gocolly/colly"
@@ -35,7 +37,7 @@ func main() {
         panic(err)
     })
 
-    c.OnHTML("div#lists ul#resultats li", func(h *colly.HTMLElement) {
+    c.OnHTML("div#lists ul#resultats li section.clearfix.complete-holder", func(h *colly.HTMLElement) {
         car := Car{
             Manufacturer: strings.TrimSpace(h.ChildText("span.title-block.brand")),
             // Model: strings.Trim(doc.Find("span.sub-title.title-block").Text(), " "),
@@ -53,4 +55,12 @@ func main() {
     })
 
     c.Visit(links[0])
+
+    content, err := json.MarshalIndent(cars, "", "  ")
+
+    if err != nil {
+        fmt.Println(err.Error())
+    }
+
+    os.WriteFile("cars.json", content, 0644)
 }
