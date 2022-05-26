@@ -28,7 +28,7 @@ func main() {
 
     links := []string{
         "https://www.theparking.eu/used-cars/toyota-corolla-e80-ae86.html#!/used-cars/toyota-corolla-e80-ae86.html%3Fid_pays%3D1%7C5%26tri%3Dprix_croissant",
-        "https://www.theparking.eu/used-cars/toyota-soarer.html#!/used-cars/toyota-soarer.html%3Ftri%3Dprix_croissant",
+        "https://www.theparking.eu/used-cars/toyota-soarer.html#!/used-cars/toyota-soarer.html%3Fid_boite%3D2%26tri%3Dprix_croissant",
     }
 
     var cars []Car
@@ -38,23 +38,24 @@ func main() {
     })
 
     c.OnHTML("div#lists ul#resultats li section.clearfix.complete-holder", func(h *colly.HTMLElement) {
-        car := Car{
-            Manufacturer: strings.TrimSpace(h.ChildText("span.title-block.brand")),
-            // Model: strings.Trim(doc.Find("span.sub-title.title-block").Text(), " "),
-            // Detail: strings.Trim(doc.Find("span.nowrap").Text(), " "),
-            // Price: strings.Trim(doc.Find("p.prix").Text(), " "),
-            // Location: strings.Trim(doc.Find("div.location > span.upper").Text(), " "),
-        }
-        fmt.Println(car.Manufacturer)
+        if h.ChildText("sponsor") != "sponsored" {
+            car := Car{
+                Manufacturer: strings.TrimSpace(h.ChildText("span.title-block.brand")),
+                Model: strings.TrimSpace(h.ChildText("span.sub-title.title-block")),
+            }
 
-        cars = append(cars, car)
+            cars = append(cars, car)
+
+            fmt.Println(cars)
+        }
+
     })
 
     c.OnRequest(func(r *colly.Request) {
         fmt.Println(r.URL.String())
     })
 
-    c.Visit(links[0])
+    c.Visit(links[1])
 
     content, err := json.MarshalIndent(cars, "", "  ")
 
