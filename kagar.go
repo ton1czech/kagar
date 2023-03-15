@@ -40,16 +40,20 @@ func main() {
     c.OnHTML("div#lists ul#resultats li section.clearfix.complete-holder", func(h *colly.HTMLElement) {
         if h.ChildText("sponsor") != "sponsored" {
             car := Car{
-                Manufacturer: strings.TrimSpace(h.ChildText("span.title-block.brand")),
-                Model: strings.TrimSpace(h.ChildText("span.sub-title.title-block")),
-                Detail: strings.TrimSpace(h.ChildText("span.nowrap")),
-                Price: strings.TrimSpace(h.ChildText("p.prix")),
+                Manufacturer: strings.TrimSpace(h.ChildText("a > span.title-block.brand")),
+                Model: strings.TrimSpace(h.ChildText("a > span.sub-title.title-block")),
+                Detail: strings.TrimSpace(h.ChildText("a > span.sub-title.title-block > span.nowrap")),
+                Price: strings.TrimSpace(h.ChildText("div.price-block > p.prix")),
                 Location: strings.TrimSpace(h.ChildText("div.location > span.upper")),
+                Fuel: strings.TrimSpace(h.ChildText("ul.info.clearfix > li:nth-of-type(1) > div.upper")),
+                Year: strings.TrimSpace(h.ChildText("ul.info.clearfix > li:nth-of-type(3) > div.upper")),
+                Transmission: strings.TrimSpace(h.ChildText("ul.info.clearfix > li:nth-of-type(4) > div.upper")),
+                Mileage: strings.TrimSpace(h.ChildText("ul.info.clearfix > li:nth-of-type(5) > div.upper")),
             }
 
             cars = append(cars, car)
 
-            fmt.Println(cars)
+            fmt.Println(cars[0])
         }
 
     })
